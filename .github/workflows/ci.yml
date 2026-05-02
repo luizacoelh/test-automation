@@ -1,0 +1,65 @@
+name: Test Automation CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  api-tests:
+    name: API Tests - Petstore
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install -r api-tests/requirements.txt
+
+      - name: Executar testes de API
+        run: pytest api-tests/ -v --html=api-tests/report.html --self-contained-html
+
+      - name: Upload relatório API
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: api-test-report
+          path: api-tests/report.html
+
+  web-tests:
+    name: Web Tests - SauceDemo
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Instalar dependências
+        run: pip install -r web-tests/requirements.txt
+
+      - name: Executar testes Web (Selenium)
+        run: pytest web-tests/tests/ -v --html=web-tests/report.html --self-contained-html
+        env:
+          PYTHONPATH: web-tests
+
+      - name: Upload relatório Web
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: web-test-report
+          path: web-tests/report.html
