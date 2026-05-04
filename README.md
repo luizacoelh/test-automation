@@ -8,6 +8,10 @@ Projeto de automação de testes cobrindo API REST e interface Web, com pipeline
 | Web    | Python + Selenium + Pytest | SauceDemo |
 | CI/CD  | GitHub Actions | Ambos |
 
+## 🎯 Objetivo do Projeto
+
+Este projeto foi desenvolvido como parte dos meus estudos no 5º período de Engenharia de Software. O foco principal foi criar uma solução de automação que integrasse testes de back-end (API) e front-end (Web) em um único fluxo de trabalho automatizado (CI/CD), simulando os desafios reais de garantia de qualidade em aplicações modernas.
+
 ---
 
 ## 📁 Estrutura do Projeto
