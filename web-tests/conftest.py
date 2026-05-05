@@ -8,6 +8,15 @@ from webdriver_manager.chrome import ChromeDriverManager
 @pytest.fixture
 def driver():
     options = Options()
+    options.add_argument("--incognito")
+    options.add_argument("--disable-features=SafeBrowsing")
+    prefs = {
+        "credentials_enable_service": False,
+        "profile.password_manager_enabled": False
+    }
+    options.add_experimental_option("prefs", prefs)
+    options.add_argument("--disable-notifications")
+    options.add_argument("--disable-popup-blocking")
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
