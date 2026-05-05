@@ -28,9 +28,10 @@ def test_login_invalid_credentials(driver):
 
 
 def test_add_product_to_cart(driver):
-    LoginPage(driver).open()
-    LoginPage(driver).login(VALID_USER, VALID_PASSWORD)
-
+    login = LoginPage(driver)
+    login.open()
+    login.login(VALID_USER, VALID_PASSWORD)
+    
     inventory = InventoryPage(driver)
     inventory.is_loaded()
     inventory.add_product_to_cart(0)
