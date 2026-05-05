@@ -1,3 +1,4 @@
+import time
 import pytest
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
@@ -46,7 +47,9 @@ def test_e2e_purchase(driver):
     inventory = InventoryPage(driver)
     inventory.is_loaded()
     inventory.add_product_to_cart(0)
+    time.sleep(1)  
     inventory.add_product_to_cart(1)
+    time.sleep(1)  
     assert inventory.get_cart_count() == 2
 
     inventory.go_to_cart()
