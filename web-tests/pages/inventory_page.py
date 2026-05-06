@@ -23,3 +23,7 @@ class InventoryPage:
 
     def go_to_cart(self):
         self.driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+    
+    def add_product_by_name(self, name: str):
+        locator = f"[data-test='add-to-cart-{name.lower().replace(' ', '-')}']"
+        self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, locator))).click()
