@@ -65,6 +65,7 @@ def test_login_user():
         params={"username": USERNAME, "password": "senha123"},
     )
     assert response.status_code == 200
+    assert "logged in user session" in response.json()["message"].lower() 
 
 
 def test_logout_user():

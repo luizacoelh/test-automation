@@ -30,6 +30,8 @@ def test_get_pet_by_id():
     response = requests.get(f"{BASE_URL}/pet/{PET_ID}")
     assert response.status_code == 200
     assert response.json()["id"] == PET_ID
+    assert response.json()["status"] == "available"
+
 
 
 def test_update_pet():
@@ -37,6 +39,7 @@ def test_update_pet():
     response = requests.put(f"{BASE_URL}/pet", json=payload)
     assert response.status_code == 200
     assert response.json()["name"] == "Rex Updated"
+    assert response.json()["status"] == "sold" 
 
 
 def test_find_pets_by_status():
